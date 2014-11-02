@@ -1,4 +1,4 @@
-compiler-teaching-jrm
-=====================
+gsynt
+=====
 
 Tools to help teaching compiler construction.
