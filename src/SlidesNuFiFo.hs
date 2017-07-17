@@ -864,7 +864,11 @@ latexNuFiFo grammar = do
     --     \\\makeatother%\n"
     frame $ do
       frametitle "Exemplo"
-      tiny $ do
-      -- scriptsize $ do
-        raw "\\smaller"
+      -- normalsize
+      -- small
+      -- footnotesize
+      scriptsize
+      -- tiny
+        $ do
+        -- raw "\\smaller"
         texyView (build grammar)
