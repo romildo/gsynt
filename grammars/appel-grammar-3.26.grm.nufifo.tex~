@@ -1,0 +1,117 @@
+\documentclass{beamer} \usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage[brazilian]{babel}\usepackage{etex}\usepackage{newtxtext}\usepackage[varg]{newtxmath}\usepackage{widest}\reserveinserts{28}\newcommand<>{\bgyellow}[1]{{\fboxsep 0pt\only#2{\colorbox{yellow!30}}{#1}}}\usetheme{OuroPreto}\setbeamersize{text margin left=0.2em, text margin right=0.2em}\setbeamercovered{transparent} \author{José Romildo Malaquias} \title{Nullable, First and Follow} 
+\begin{document}
+    \scriptsize
+    \begin{frame}     \maketitle 
+    \end{frame} 
+    \begin{frame}
+        \frametitle{Exemplo} 
+        \begin{tabular}[t]{@{}l@{}}
+            
+            \begin{tabular}[t]{@{}l@{}l@{}}
+                \newdimen\largest\widest(S',S,S,E,V,V)\largest
+                \begin{tabular}[t]{l}
+                    \makebox[\largest][l]{\textit{S'} }
+                    \hspace{1.00000pt} $\to
+                    $\hspace{1.00000pt} \textit{S}
+                    \hspace{2.00000pt} \texttt{\textbf{\$} }
+                    \\\makebox[\largest][l]{\textit{S} }
+                    \hspace{1.00000pt} $\to
+                    $\hspace{1.00000pt} \textit{V}
+                    \hspace{2.00000pt} \texttt{\textbf{=} }
+                    \hspace{2.00000pt} \textit{E}
+                    \\\makebox[\largest][l]{\textit{S} }
+                    \hspace{1.00000pt} $\to
+                    $\hspace{1.00000pt} \textit{E}
+                    \\\makebox[\largest][l]{\textit{E} }
+                    \hspace{1.00000pt} $\to
+                    $\hspace{1.00000pt} \textit{V}
+                    \\\makebox[\largest][l]{\textit{V} }
+                    \hspace{1.00000pt} $\to
+                    $\hspace{1.00000pt} \texttt{\textbf{x} }
+                    \\\makebox[\largest][l]{\textit{V} }
+                    \hspace{1.00000pt} $\to
+                    $\hspace{1.00000pt} \texttt{\textbf{*} }
+                    \hspace{2.00000pt} \textit{E} 
+                \end{tabular} &
+                \begin{tabular}[t]{|llll|}
+                    \hline  \textbf{NT} &\textbf{Nullable}
+                    &\textbf{First} &\textbf{Follow}
+                    \\\hline  \textit{S'} &$\times
+                    $&\texttt{\textbf{x} }
+                    ~\texttt{\textbf{*} } &\\\hline 
+                    \textit{S} &$\times
+                    $&\texttt{\textbf{x} }
+                    ~\texttt{\textbf{*} }
+                    &\texttt{\textbf{\$} } \\\hline 
+                    \textit{V} &$\times
+                    $&\texttt{\textbf{x} }
+                    ~\texttt{\textbf{*} }
+                    &\texttt{\textbf{=} }
+                    ~\texttt{\textbf{\$} } \\\hline 
+                    \textit{E} &$\times
+                    $&\texttt{\textbf{x} }
+                    ~\texttt{\textbf{*} }
+                    &\texttt{\textbf{\$} }
+                    ~\texttt{\textbf{=} } \\\hline  
+                \end{tabular} 
+            \end{tabular} \\
+            \begin{tabular}[t]{|lllll|}
+                \hline  &\textbf{\texttt{\textbf{\$} } }
+                &\textbf{\texttt{\textbf{*} } }
+                &\textbf{\texttt{\textbf{=} } }
+                &\textbf{\texttt{\textbf{x} } } \\\hline 
+                \textbf{\textit{S'} } &
+                \begin{tabular}[t]{@{}l@{}}     
+                \end{tabular} &
+                \begin{tabular}[t]{@{}l@{}}
+                    \textit{S} \texttt{\textbf{\$} } 
+                \end{tabular} &
+                \begin{tabular}[t]{@{}l@{}}     
+                \end{tabular} &
+                \begin{tabular}[t]{@{}l@{}}
+                    \textit{S} \texttt{\textbf{\$} } 
+                \end{tabular} \\\hline  \textbf{\textit{S} }
+                &
+                \begin{tabular}[t]{@{}l@{}}     
+                \end{tabular} &
+                \begin{tabular}[t]{@{}l@{}}
+                    \textit{V} \texttt{\textbf{=} }
+                    \textit{E} \\\textit{E} 
+                \end{tabular} &
+                \begin{tabular}[t]{@{}l@{}}     
+                \end{tabular} &
+                \begin{tabular}[t]{@{}l@{}}
+                    \textit{V} \texttt{\textbf{=} }
+                    \textit{E} \\\textit{E} 
+                \end{tabular} \\\hline  \textbf{\textit{V} }
+                &
+                \begin{tabular}[t]{@{}l@{}}     
+                \end{tabular} &
+                \begin{tabular}[t]{@{}l@{}}
+                    \texttt{\textbf{*} } \textit{E} 
+                \end{tabular} &
+                \begin{tabular}[t]{@{}l@{}}     
+                \end{tabular} &
+                \begin{tabular}[t]{@{}l@{}}
+                    \texttt{\textbf{x} } 
+                \end{tabular} \\\hline  \textbf{\textit{E} }
+                &
+                \begin{tabular}[t]{@{}l@{}}     
+                \end{tabular} &
+                \begin{tabular}[t]{@{}l@{}}     \textit{V} 
+                \end{tabular} &
+                \begin{tabular}[t]{@{}l@{}}     
+                \end{tabular} &
+                \begin{tabular}[t]{@{}l@{}}     \textit{V} 
+                \end{tabular} \\\hline  
+            \end{tabular} 
+        \end{tabular} \vfill \setbeamercovered{invisible} 
+        \begin{overprint}
+            
+            \begin{center}     
+            \end{center} 
+        \end{overprint} 
+    \end{frame} 
+\end{document} 

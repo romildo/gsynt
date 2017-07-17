@@ -1,0 +1,28 @@
+
+% =========================================================
+% Auxiliary:
+%   finding the widest string in a comma
+%   separated list of strings delimited by parenthesis
+% =========================================================
+
+% arguments:
+% #1) text: a comma separeted list of strings
+% #2) dimension: will hold the result
+
+\def\widest(#1)#2{%
+  \begingroup
+  \def\widest@end{\widest@end}%
+  \def\widest@helper##1,{%
+    \ifx\widest@end##1\relax
+    \else
+      \settowidth\dimen@{##1}%
+      \ifdim#2<\dimen@
+        \global#2=\dimen@
+      \else
+      \fi
+      \expandafter\widest@helper
+    \fi
+  }%
+  \widest@helper#1,\widest@end,%
+  \endgroup
+}

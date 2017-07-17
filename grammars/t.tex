@@ -1,0 +1,41 @@
+\documentclass[a4paper]{article}
+
+\usepackage{tikz}
+\usetikzlibrary{quotes,graphs,graphdrawing}
+\usegdlibrary{layered, force, circular}
+
+\newcommand\text[1]{%
+  \begin{tabular}[t]{|l|}%
+    \multicolumn{1}{l}{#1}\\\hline
+    X $\to$ A B C\\\hline
+    X $\to$ x y\\
+    Y $\to$ ( L )\\
+    S $\to \bullet$ x X\\\hline
+  \end{tabular}%
+}
+
+\begin{document}
+
+\begin{tikzpicture}
+  \graph [
+  % simple necklace layout,
+  spring electrical Walshaw 2000 layout,
+  % componentwise,
+  % node distance = 3cm,
+  ] {
+    a/[as=\text{first}]
+    -> ["S"]
+    b/[as=\text{second}]
+    -> ["t"];
+
+    a
+    -> ["k"]
+    c/[as=\text{third}]
+    -> ["x"]
+    d/[as=fourth]
+    -> ["y"]
+    e/[as=fifth];
+  };
+\end{tikzpicture}
+
+\end{document}

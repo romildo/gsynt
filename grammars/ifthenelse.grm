@@ -1,0 +1,7 @@
+S' -> S "$"
+
+S  -> "if" E "then" S "else" S
+S  -> "if" E "then" S
+S  -> "cmd"
+
+E  -> "id"

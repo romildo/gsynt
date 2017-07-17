@@ -1,0 +1,151 @@
+\documentclass[a4paper]{beamer}\usepackage{ifluatex}
+\ifluatex
+\usepackage{polyglossia}\setdefaultlanguage[]{brazil}
+\usepackage{lmodern}
+\else
+\usepackage[utf8]{inputenc}\usepackage[brazilian]{babel}
+\usepackage{newtxtext}
+\usepackage[varg]{newtxmath}
+\fi
+\usepackage{tikz}\usepackage{amssymb}\usepackage{relsize}\usepackage{etex}
+\usepackage{widest}
+\usepackage[tikz,debug]{dot2texi}
+\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{quotes,graphs}
+\ifluatex
+\usetikzlibrary{graphdrawing}
+\usegdlibrary{layered,force,circular}
+\else
+\fi
+\reserveinserts{28}
+\newcommand<>{\bgyellow}[1]{{\fboxsep 0pt\only#2{\colorbox{yellow!30}}{#1}}}
+\usetheme{OuroPreto}
+\setbeamersize{text margin left=0.2em, text margin right=0.2em}
+\setbeamercovered{transparent}\author{José Romildo Malaquias}\title{Análise Sintática LR}\begin{document}\scriptsize
+\smaller[4]\newbox\a
+\newbox\b
+\newbox\c
+\newbox\d
+\newbox\e
+\newbox\f
+\newbox\g
+\newbox\h
+\newbox\i
+\newbox\j
+\newbox\k
+\newbox\l
+\newbox\m
+\newbox\n
+\newbox\o
+\newbox\p
+\newbox\q
+\newbox\r
+\newbox\s
+\newbox\t
+\newbox\u
+\newbox\v
+\newbox\w
+\begin{frame}\maketitle{}\end{frame}\begin{frame}[fragile,plain]
+\begin{tabular}[t]{@{}l@{}l@{}l@{}}\newdimen\largestnumber\widest(0,1,2,3,4,5,6,7,8,9,10,11)\largestnumber\newdimen\largestlhs\widest(S,E,E',E',E',T,T',T',T',F,F,F)\largestlhs\begin{tabular}[t]{l}\makebox[\largestnumber][l]{\textsmaller[2]{0}}\hspace{2.00000pt}\makebox[\largestlhs][r]{\textit{S}}$\to{}$\textit{E}\hspace{2.00000pt}\texttt{\textbf{\$}}\\\makebox[\largestnumber][l]{\textsmaller[2]{1}}\hspace{2.00000pt}\makebox[\largestlhs][r]{\textit{E}}$\to{}$\textit{T}\hspace{2.00000pt}\textit{E'}\\\makebox[\largestnumber][l]{\textsmaller[2]{2}}\hspace{2.00000pt}\makebox[\largestlhs][r]{\textit{E'}}$\to{}$\texttt{\textbf{+}}\hspace{2.00000pt}\textit{T}\hspace{2.00000pt}\textit{E'}\\\makebox[\largestnumber][l]{\textsmaller[2]{3}}\hspace{2.00000pt}\makebox[\largestlhs][r]{\textit{E'}}$\to{}$\texttt{\textbf{-}}\hspace{2.00000pt}\textit{T}\hspace{2.00000pt}\textit{E'}\\\makebox[\largestnumber][l]{\textsmaller[2]{4}}\hspace{2.00000pt}\makebox[\largestlhs][r]{\textit{E'}}$\to{}$\\\makebox[\largestnumber][l]{\textsmaller[2]{5}}\hspace{2.00000pt}\makebox[\largestlhs][r]{\textit{T}}$\to{}$\textit{F}\hspace{2.00000pt}\textit{T'}\\\makebox[\largestnumber][l]{\textsmaller[2]{6}}\hspace{2.00000pt}\makebox[\largestlhs][r]{\textit{T'}}$\to{}$\texttt{\textbf{*}}\hspace{2.00000pt}\textit{F}\hspace{2.00000pt}\textit{T'}\\\makebox[\largestnumber][l]{\textsmaller[2]{7}}\hspace{2.00000pt}\makebox[\largestlhs][r]{\textit{T'}}$\to{}$\texttt{\textbf{/}}\hspace{2.00000pt}\textit{F}\hspace{2.00000pt}\textit{T'}\\\makebox[\largestnumber][l]{\textsmaller[2]{8}}\hspace{2.00000pt}\makebox[\largestlhs][r]{\textit{T'}}$\to{}$\\\makebox[\largestnumber][l]{\textsmaller[2]{9}}\hspace{2.00000pt}\makebox[\largestlhs][r]{\textit{F}}$\to{}$\texttt{\textbf{id}}\\\makebox[\largestnumber][l]{\textsmaller[2]{10}}\hspace{2.00000pt}\makebox[\largestlhs][r]{\textit{F}}$\to{}$\texttt{\textbf{num}}\\\makebox[\largestnumber][l]{\textsmaller[2]{11}}\hspace{2.00000pt}\makebox[\largestlhs][r]{\textit{F}}$\to{}$\texttt{\textbf{(}}\hspace{2.00000pt}\textit{E}\hspace{2.00000pt}\texttt{\textbf{)}}\end{tabular}&
+\setbox\a\hbox{%
+\begin{tabular}[t]{|l|}\multicolumn{1}{l}{1}\\\hline \textit{S}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\textit{E}~\texttt{\textbf{\$}}\\\hline \textit{E}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\textit{T}~\textit{E'}\\\hline \textit{T}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\textit{F}~\textit{T'}\\\hline \textit{F}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\texttt{\textbf{id}}\\\textit{F}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\texttt{\textbf{num}}\\\textit{F}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\texttt{\textbf{(}}~\textit{E}~\texttt{\textbf{)}}\\\hline \end{tabular}}%
+\setbox\b\hbox{%
+\begin{tabular}[t]{|l|}\multicolumn{1}{l}{2}\\\hline \textit{S}$\to{}$\textit{E}\textcolor{blue}{$\,\bullet{}\,$}\texttt{\textbf{\$}}\\\hline \end{tabular}}%
+\setbox\c\hbox{%
+\begin{tabular}[t]{|l|}\multicolumn{1}{l}{3}\\\hline \textit{E}$\to{}$\textit{T}\textcolor{blue}{$\,\bullet{}\,$}\textit{E'}\\\hline \textit{E'}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\texttt{\textbf{+}}~\textit{T}~\textit{E'}\\\textit{E'}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\texttt{\textbf{-}}~\textit{T}~\textit{E'}\\\textit{E'}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\\\hline \end{tabular}}%
+\setbox\d\hbox{%
+\begin{tabular}[t]{|l|}\multicolumn{1}{l}{4}\\\hline \textit{T}$\to{}$\textit{F}\textcolor{blue}{$\,\bullet{}\,$}\textit{T'}\\\hline \textit{T'}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\texttt{\textbf{*}}~\textit{F}~\textit{T'}\\\textit{T'}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\texttt{\textbf{/}}~\textit{F}~\textit{T'}\\\textit{T'}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\\\hline \end{tabular}}%
+\setbox\e\hbox{%
+\begin{tabular}[t]{|l|}\multicolumn{1}{l}{5}\\\hline \textit{F}$\to{}$\texttt{\textbf{id}}\textcolor{blue}{$\,\bullet{}\,$}\\\hline \end{tabular}}%
+\setbox\f\hbox{%
+\begin{tabular}[t]{|l|}\multicolumn{1}{l}{6}\\\hline \textit{F}$\to{}$\texttt{\textbf{num}}\textcolor{blue}{$\,\bullet{}\,$}\\\hline \end{tabular}}%
+\setbox\g\hbox{%
+\begin{tabular}[t]{|l|}\multicolumn{1}{l}{7}\\\hline \textit{F}$\to{}$\texttt{\textbf{(}}\textcolor{blue}{$\,\bullet{}\,$}\textit{E}~\texttt{\textbf{)}}\\\hline \textit{E}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\textit{T}~\textit{E'}\\\hline \textit{T}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\textit{F}~\textit{T'}\\\hline \textit{F}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\texttt{\textbf{id}}\\\textit{F}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\texttt{\textbf{num}}\\\textit{F}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\texttt{\textbf{(}}~\textit{E}~\texttt{\textbf{)}}\\\hline \end{tabular}}%
+\setbox\h\hbox{%
+\begin{tabular}[t]{|l|}\multicolumn{1}{l}{8}\\\hline \textit{E}$\to{}$\textit{T}~\textit{E'}\textcolor{blue}{$\,\bullet{}\,$}\\\hline \end{tabular}}%
+\setbox\i\hbox{%
+\begin{tabular}[t]{|l|}\multicolumn{1}{l}{9}\\\hline \textit{E'}$\to{}$\texttt{\textbf{+}}\textcolor{blue}{$\,\bullet{}\,$}\textit{T}~\textit{E'}\\\hline \textit{T}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\textit{F}~\textit{T'}\\\hline \textit{F}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\texttt{\textbf{id}}\\\textit{F}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\texttt{\textbf{num}}\\\textit{F}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\texttt{\textbf{(}}~\textit{E}~\texttt{\textbf{)}}\\\hline \end{tabular}}%
+\setbox\j\hbox{%
+\begin{tabular}[t]{|l|}\multicolumn{1}{l}{10}\\\hline \textit{E'}$\to{}$\texttt{\textbf{-}}\textcolor{blue}{$\,\bullet{}\,$}\textit{T}~\textit{E'}\\\hline \textit{T}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\textit{F}~\textit{T'}\\\hline \textit{F}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\texttt{\textbf{id}}\\\textit{F}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\texttt{\textbf{num}}\\\textit{F}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\texttt{\textbf{(}}~\textit{E}~\texttt{\textbf{)}}\\\hline \end{tabular}}%
+\setbox\k\hbox{%
+\begin{tabular}[t]{|l|}\multicolumn{1}{l}{11}\\\hline \textit{T}$\to{}$\textit{F}~\textit{T'}\textcolor{blue}{$\,\bullet{}\,$}\\\hline \end{tabular}}%
+\setbox\l\hbox{%
+\begin{tabular}[t]{|l|}\multicolumn{1}{l}{12}\\\hline \textit{T'}$\to{}$\texttt{\textbf{*}}\textcolor{blue}{$\,\bullet{}\,$}\textit{F}~\textit{T'}\\\hline \textit{F}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\texttt{\textbf{id}}\\\textit{F}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\texttt{\textbf{num}}\\\textit{F}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\texttt{\textbf{(}}~\textit{E}~\texttt{\textbf{)}}\\\hline \end{tabular}}%
+\setbox\m\hbox{%
+\begin{tabular}[t]{|l|}\multicolumn{1}{l}{13}\\\hline \textit{T'}$\to{}$\texttt{\textbf{/}}\textcolor{blue}{$\,\bullet{}\,$}\textit{F}~\textit{T'}\\\hline \textit{F}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\texttt{\textbf{id}}\\\textit{F}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\texttt{\textbf{num}}\\\textit{F}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\texttt{\textbf{(}}~\textit{E}~\texttt{\textbf{)}}\\\hline \end{tabular}}%
+\setbox\n\hbox{%
+\begin{tabular}[t]{|l|}\multicolumn{1}{l}{14}\\\hline \textit{F}$\to{}$\texttt{\textbf{(}}~\textit{E}\textcolor{blue}{$\,\bullet{}\,$}\texttt{\textbf{)}}\\\hline \end{tabular}}%
+\setbox\o\hbox{%
+\begin{tabular}[t]{|l|}\multicolumn{1}{l}{15}\\\hline \textit{E'}$\to{}$\texttt{\textbf{+}}~\textit{T}\textcolor{blue}{$\,\bullet{}\,$}\textit{E'}\\\hline \textit{E'}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\texttt{\textbf{+}}~\textit{T}~\textit{E'}\\\textit{E'}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\texttt{\textbf{-}}~\textit{T}~\textit{E'}\\\textit{E'}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\\\hline \end{tabular}}%
+\setbox\p\hbox{%
+\begin{tabular}[t]{|l|}\multicolumn{1}{l}{16}\\\hline \textit{E'}$\to{}$\texttt{\textbf{-}}~\textit{T}\textcolor{blue}{$\,\bullet{}\,$}\textit{E'}\\\hline \textit{E'}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\texttt{\textbf{+}}~\textit{T}~\textit{E'}\\\textit{E'}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\texttt{\textbf{-}}~\textit{T}~\textit{E'}\\\textit{E'}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\\\hline \end{tabular}}%
+\setbox\q\hbox{%
+\begin{tabular}[t]{|l|}\multicolumn{1}{l}{17}\\\hline \textit{T'}$\to{}$\texttt{\textbf{*}}~\textit{F}\textcolor{blue}{$\,\bullet{}\,$}\textit{T'}\\\hline \textit{T'}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\texttt{\textbf{*}}~\textit{F}~\textit{T'}\\\textit{T'}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\texttt{\textbf{/}}~\textit{F}~\textit{T'}\\\textit{T'}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\\\hline \end{tabular}}%
+\setbox\r\hbox{%
+\begin{tabular}[t]{|l|}\multicolumn{1}{l}{18}\\\hline \textit{T'}$\to{}$\texttt{\textbf{/}}~\textit{F}\textcolor{blue}{$\,\bullet{}\,$}\textit{T'}\\\hline \textit{T'}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\texttt{\textbf{*}}~\textit{F}~\textit{T'}\\\textit{T'}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\texttt{\textbf{/}}~\textit{F}~\textit{T'}\\\textit{T'}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\\\hline \end{tabular}}%
+\setbox\s\hbox{%
+\begin{tabular}[t]{|l|}\multicolumn{1}{l}{19}\\\hline \textit{F}$\to{}$\texttt{\textbf{(}}~\textit{E}~\texttt{\textbf{)}}\textcolor{blue}{$\,\bullet{}\,$}\\\hline \end{tabular}}%
+\setbox\t\hbox{%
+\begin{tabular}[t]{|l|}\multicolumn{1}{l}{20}\\\hline \textit{E'}$\to{}$\texttt{\textbf{+}}~\textit{T}~\textit{E'}\textcolor{blue}{$\,\bullet{}\,$}\\\hline \end{tabular}}%
+\setbox\u\hbox{%
+\begin{tabular}[t]{|l|}\multicolumn{1}{l}{21}\\\hline \textit{E'}$\to{}$\texttt{\textbf{-}}~\textit{T}~\textit{E'}\textcolor{blue}{$\,\bullet{}\,$}\\\hline \end{tabular}}%
+\setbox\v\hbox{%
+\begin{tabular}[t]{|l|}\multicolumn{1}{l}{22}\\\hline \textit{T'}$\to{}$\texttt{\textbf{*}}~\textit{F}~\textit{T'}\textcolor{blue}{$\,\bullet{}\,$}\\\hline \end{tabular}}%
+\setbox\w\hbox{%
+\begin{tabular}[t]{|l|}\multicolumn{1}{l}{23}\\\hline \textit{T'}$\to{}$\texttt{\textbf{/}}~\textit{F}~\textit{T'}\textcolor{blue}{$\,\bullet{}\,$}\\\hline \end{tabular}}%
+\begin{tikzpicture}[baseline=(current bounding box.north),rounded corners]
+\graph [spring electrical Walshaw 2000 layout, node distance=2cm] {
+a/[as=\copy\a] -> ["{\textit{E}}"] b/[as=\copy\b];
+a -> ["{\textit{T}}"] c/[as=\copy\c];
+a -> ["{\textit{F}}"] d/[as=\copy\d];
+a -> ["{\texttt{\textbf{id}}}"] e/[as=\copy\e];
+a -> ["{\texttt{\textbf{num}}}"] f/[as=\copy\f];
+a -> ["{\texttt{\textbf{(}}}"] g/[as=\copy\g];
+c -> ["{\textit{E'}}"] h/[as=\copy\h];
+c -> ["{\texttt{\textbf{+}}}"] i/[as=\copy\i];
+c -> ["{\texttt{\textbf{-}}}"] j/[as=\copy\j];
+d -> ["{\textit{T'}}"] k/[as=\copy\k];
+d -> ["{\texttt{\textbf{*}}}"] l/[as=\copy\l];
+d -> ["{\texttt{\textbf{/}}}"] m/[as=\copy\m];
+g -> ["{\textit{E}}"] n/[as=\copy\n];
+g -> ["{\textit{T}}"] c;
+g -> ["{\textit{F}}"] d;
+g -> ["{\texttt{\textbf{id}}}"] e;
+g -> ["{\texttt{\textbf{num}}}"] f;
+g -> ["{\texttt{\textbf{(}}}",loop left,distance=2mm] g;
+i -> ["{\textit{T}}"] o/[as=\copy\o];
+i -> ["{\textit{F}}"] d;
+i -> ["{\texttt{\textbf{id}}}"] e;
+i -> ["{\texttt{\textbf{num}}}"] f;
+i -> ["{\texttt{\textbf{(}}}"] g;
+j -> ["{\textit{T}}"] p/[as=\copy\p];
+j -> ["{\textit{F}}"] d;
+j -> ["{\texttt{\textbf{id}}}"] e;
+j -> ["{\texttt{\textbf{num}}}"] f;
+j -> ["{\texttt{\textbf{(}}}"] g;
+l -> ["{\textit{F}}"] q/[as=\copy\q];
+l -> ["{\texttt{\textbf{id}}}"] e;
+l -> ["{\texttt{\textbf{num}}}"] f;
+l -> ["{\texttt{\textbf{(}}}"] g;
+m -> ["{\textit{F}}"] r/[as=\copy\r];
+m -> ["{\texttt{\textbf{id}}}"] e;
+m -> ["{\texttt{\textbf{num}}}"] f;
+m -> ["{\texttt{\textbf{(}}}"] g;
+n -> ["{\texttt{\textbf{)}}}"] s/[as=\copy\s];
+o -> ["{\textit{E'}}"] t/[as=\copy\t];
+o -> ["{\texttt{\textbf{+}}}"] i;
+o -> ["{\texttt{\textbf{-}}}"] j;
+p -> ["{\textit{E'}}"] u/[as=\copy\u];
+p -> ["{\texttt{\textbf{+}}}"] i;
+p -> ["{\texttt{\textbf{-}}}"] j;
+q -> ["{\textit{T'}}"] v/[as=\copy\v];
+q -> ["{\texttt{\textbf{*}}}"] l;
+q -> ["{\texttt{\textbf{/}}}"] m;
+r -> ["{\textit{T'}}"] w/[as=\copy\w];
+r -> ["{\texttt{\textbf{*}}}"] l;
+r -> ["{\texttt{\textbf{/}}}"] m;
+};
+\end{tikzpicture}
+&LR(0) Table\end{tabular}
+\end{frame}
+\end{document}

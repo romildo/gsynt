@@ -1,0 +1,611 @@
+\documentclass{beamer} \usepackage[utf8]{inputenc}
+\usepackage{amssymb} \usepackage{tikz}
+\usepackage[brazilian]{babel}%
+\usepackage{etex}%
+\usepackage{newtxtext}%
+\usepackage[varg]{newtxmath}%
+\usepackage{array}%
+\usepackage{widest}%
+\reserveinserts{28}%
+\setlength{\tabcolsep}{3pt}%
+\renewcommand{\familydefault}{\sfdefault}%
+\newcommand<>{\bgyellow}[1]{{\fboxsep 0pt\only#2{\colorbox{yellow!30}}{#1}}}%
+\newcommand<>{\bggreen}[1]{{\fboxsep 0pt\only#2{\colorbox{green!30}}{#1}}}%
+\newcommand<>{\bg}[2]{{\fboxsep 0pt\only#3{\colorbox{#1}}{#2}}}%
+\setbeamersize{text margin left=0.1em, text margin right=0.1em}%
+\setbeamertemplate{frametitle}{}%
+\setbeamercovered{transparent} \author{José Romildo Malaquias} \title{Nullable, First and Follow} 
+\begin{document}
+    
+    \begin{frame}     \maketitle 
+    \end{frame} 
+    \begin{frame}
+        \frametitle{Exemplo} {\tiny \newdimen\largest\widest(S',S,S,E,V,V)\largest%
+
+        \begin{tabular}[t]{@{}l@{}}
+            \invisible<1-2>{\uncover<3-7, 13-30, 45->{\bggreen<3>{\bgyellow<7, 16, 20, 24, 30-30>{\makebox[\largest][l]{\textup{\textsf{S'} } } \hspace{1.00000pt} $\to $\hspace{1.00000pt} \alert<3, 46>{\textup{\textsf{S} } } \hspace{2.00000pt} \alert<7>{\textbf{\texttt{\$} } } } } } } \\\uncover<1-8, 13->{\bgyellow<2-3, 8, 17, 21, 25, 31-32, 37-37, 41-41>{\makebox[\largest][l]{\alert<2-3>{\textup{\textsf{S} } } } \hspace{1.00000pt} $\to $\hspace{1.00000pt} \alert<48>{\textup{\textsf{V} } } \hspace{2.00000pt} \alert<8>{\textbf{\texttt{=} } } \hspace{2.00000pt} \textup{\textsf{E} } } } \\\uncover<1->{\bgyellow<11, 18, 22, 26, 33-33, 38-38, 42-42>{\makebox[\largest][l]{\textup{\textsf{S} } } \hspace{1.00000pt} $\to $\hspace{1.00000pt} \alert<11, 50>{\textup{\textsf{E} } } } } \\\uncover<1->{\bgyellow<12, 19, 23, 27, 34-34, 39-39, 43-43>{\makebox[\largest][l]{\textup{\textsf{E} } } \hspace{1.00000pt} $\to $\hspace{1.00000pt} \alert<12, 52>{\textup{\textsf{V} } } } } \\\uncover<1-9, 13-14, 28-35, 45->{\bgyellow<9, 14, 35-35>{\makebox[\largest][l]{\textup{\textsf{V} } } \hspace{1.00000pt} $\to $\hspace{1.00000pt} \alert<9, 54>{\textbf{\texttt{x} } } } } \\\uncover<1-10, 13-15, 28->{\bgyellow<10, 15, 36-36, 40-40, 44-44>{\makebox[\largest][l]{\textup{\textsf{V} } } \hspace{1.00000pt} $\to $\hspace{1.00000pt} \alert<10, 56>{\textbf{\texttt{*} } } \hspace{2.00000pt} \textup{\textsf{E} } } } 
+        \end{tabular} \hfill
+        \visible<4->{
+                \begin{tabular}[t]{|l|l|l|l|}
+                    \firsthline\textbf{NT} &\textbf{Nullable} &\textbf{First} &\textbf{Follow} \\\hline  \visible<5->{\bgyellow<16, 20, 24>{\textup{\textsf{S'} } } } &\visible<6->{\alert<6>{$\times $} } &\visible<20-, 24->{\alert<20, 24>{\textbf{\texttt{x} } } } \hspace{4.00000pt} \visible<20-, 24->{\alert<20, 24>{\textbf{\texttt{*} } } } &\\\hline  \visible<5->{\bgyellow<17, 18, 21, 22, 25, 26>{\textup{\textsf{S} } } } &\visible<6->{\alert<6>{$\times $} } &\visible<17-, 21-, 22-, 25-, 26->{\alert<17, 21, 22, 25, 26>{\textbf{\texttt{x} } } } \hspace{4.00000pt} \visible<17-, 21-, 22-, 25-, 26->{\alert<17, 21, 22, 25, 26>{\textbf{\texttt{*} } } } &\visible<30->{\alert<30>{\textbf{\texttt{\$} } } } \\\hline  \visible<5->{\bgyellow<14, 15>{\textup{\textsf{V} } } } &\visible<6->{\alert<6>{$\times $} } &\visible<14->{\alert<14>{\textbf{\texttt{x} } } } \hspace{4.00000pt} \visible<15->{\alert<15>{\textbf{\texttt{*} } } } &\visible<31-, 43->{\alert<31, 43>{\textbf{\texttt{=} } } } \hspace{4.00000pt} \visible<39-, 43->{\alert<39, 43>{\textbf{\texttt{\$} } } } \\\hline  \visible<5->{\bgyellow<19, 23, 27>{\textup{\textsf{E} } } } &\visible<6->{\alert<6>{$\times $} } &\visible<19-, 23-, 27->{\alert<19, 23, 27>{\textbf{\texttt{x} } } } \hspace{4.00000pt} \visible<19-, 23-, 27->{\alert<19, 23, 27>{\textbf{\texttt{*} } } } &\visible<37-, 38-, 40-, 41-, 42-, 44->{\alert<37, 38, 40, 41, 42, 44>{\textbf{\texttt{\$} } } } \hspace{4.00000pt} \visible<40-, 44->{\alert<40, 44>{\textbf{\texttt{=} } } } \\\hline  
+                \end{tabular} } \vfill
+        \visible<45->{
+                \begin{tabular}[t]{|l|l|l|l|l|}
+                    \hline  &\textbf{\textbf{\texttt{\$} } } &\textbf{\textbf{\texttt{*} } } &\textbf{\textbf{\texttt{=} } } &\textbf{\textbf{\texttt{x} } } \\\hline  \textup{\textsf{S'} } &
+                    \begin{tabular}[t]{@{}l@{}}     
+                    \end{tabular} &
+                    \begin{tabular}[t]{@{}l@{}}
+                        \visible<47->{\bgyellow<47>{\textup{\textsf{S} } ~\textbf{\texttt{\$} } } } 
+                    \end{tabular} &
+                    \begin{tabular}[t]{@{}l@{}}     
+                    \end{tabular} &
+                    \begin{tabular}[t]{@{}l@{}}
+                        \visible<47->{\bgyellow<47>{\textup{\textsf{S} } ~\textbf{\texttt{\$} } } } 
+                    \end{tabular} \\\hline 
+                    \textup{\textsf{S} } &
+                    \begin{tabular}[t]{@{}l@{}}     
+                    \end{tabular} &
+                    \begin{tabular}[t]{@{}l@{}}
+                        \visible<49->{\bgyellow<49>{\textup{\textsf{V} } ~\textbf{\texttt{=} } ~\textup{\textsf{E} } } } \\\visible<51->{\bgyellow<51>{\textup{\textsf{E} } } } 
+                    \end{tabular} &
+                    \begin{tabular}[t]{@{}l@{}}     
+                    \end{tabular} &
+                    \begin{tabular}[t]{@{}l@{}}
+                        \visible<49->{\bgyellow<49>{\textup{\textsf{V} } ~\textbf{\texttt{=} } ~\textup{\textsf{E} } } } \\\visible<51->{\bgyellow<51>{\textup{\textsf{E} } } } 
+                    \end{tabular} \\\hline 
+                    \textup{\textsf{V} } &
+                    \begin{tabular}[t]{@{}l@{}}     
+                    \end{tabular} &
+                    \begin{tabular}[t]{@{}l@{}}
+                        \visible<57->{\bgyellow<57>{\textbf{\texttt{*} } ~\textup{\textsf{E} } } } 
+                    \end{tabular} &
+                    \begin{tabular}[t]{@{}l@{}}     
+                    \end{tabular} &
+                    \begin{tabular}[t]{@{}l@{}}
+                        \visible<55->{\bgyellow<55>{\textbf{\texttt{x} } } } 
+                    \end{tabular} \\\hline 
+                    \textup{\textsf{E} } &
+                    \begin{tabular}[t]{@{}l@{}}     
+                    \end{tabular} &
+                    \begin{tabular}[t]{@{}l@{}}
+                        \visible<53->{\bgyellow<53>{\textup{\textsf{V} } } } 
+                    \end{tabular} &
+                    \begin{tabular}[t]{@{}l@{}}     
+                    \end{tabular} &
+                    \begin{tabular}[t]{@{}l@{}}
+                        \visible<53->{\bgyellow<53>{\textup{\textsf{V} } } } 
+                    \end{tabular} \\\hline  
+                \end{tabular} } \vfill
+        \setbeamercovered{invisible} 
+        \begin{overprint}
+            
+            \begin{flushleft}
+                \only<1>{
+                     \begin{center}
+                         \textbf{Esta é a gramática livre de contexto!} \par 
+                     \end{center} }
+                \only<2-3>{
+                     \begin{center}
+                         \textbf{Acertando a gramática} \par
+                         Símbolo inicial: \textcolor
+                         {red}{\textup{\textsf{S} } }\par
+                         Novo símbolo inicial: \textcolor
+                         {red}{\textup{\textsf{S'} } }\par 
+                     \end{center} }
+                \only<3>{
+                     \begin{center}
+                         Nova regra de produção: \textup{\textsf{S'} } $\to $\textup{\textsf{S} } \hspace{2.00000pt} \textbf{\texttt{\$} } \par 
+                     \end{center} }
+                \only<4-5>{
+                     \begin{center}
+                         \textbf{Tabela de símbolos anuláveis, conjuntos first e conjuntos follow} \par 
+                     \end{center} }
+                \only<6>{
+                     \begin{center}
+                         \textbf{Encontrando os símbolos não terminais anuláveis} \par Inicialmente nenhum símbolo não terminal é anulável
+                     \end{center} }
+                \only<7>{
+                     \begin{center}
+                         Regra com terminal no lado direito é inútil
+                     \end{center} }
+                \only<8>{
+                     \begin{center}
+                         Regra com terminal no lado direito é inútil
+                     \end{center} }
+                \only<9>{
+                     \begin{center}
+                         Regra com terminal no lado direito é inútil
+                     \end{center} }
+                \only<10>{
+                     \begin{center}
+                         Regra com terminal no lado direito é inútil
+                     \end{center} }
+                \only<11>{
+                     \begin{center}
+                         Lado direito da regra não é anulável
+                     \end{center} }
+                \only<12>{
+                     \begin{center}
+                         Lado direito da regra não é anulável
+                     \end{center} }
+                \only<13>{
+                     \begin{center}
+                         \textbf{Encontrando os conjuntos first} \par Inicialmente são vazios
+                     \end{center} }
+                \only<14>{
+                     \begin{center}
+                         \begin{tikzpicture}%
+\node[rectangle,draw,fill=yellow!30](a){\textup{\textsf{V} } };%
+\node[][right of=a](b){$\to$};%
+\node[rectangle,draw,fill=green!30][right of=b](c){\textbf{\texttt{x} } } edge [->, bend right=45] node[auto,swap]{FIRST} (a);%
+\node[red,below] at (c.south){símbolo terminal};%
+\end{tikzpicture}%
+\par $\text{FIRST}(\text{\textup{\textsf{V} } }) = \{\,\,\} \cup \{\, \text{\textcolor {red}{\textbf{\texttt{x} } }} \,\}$%%
+
+
+                     \end{center} }
+                \only<15>{
+                     \begin{center}
+                         \begin{tikzpicture}%
+\node[rectangle,draw,fill=yellow!30](a){\textup{\textsf{V} } };%
+\node[][right of=a](b){$\to$};%
+\node[rectangle,draw,fill=green!30][right of=b](c){\textbf{\texttt{*} } } edge [->, bend right=45] node[auto,swap]{FIRST} (a);%
+\node[][right of=c](d){\textup{\textsf{E} } };%
+\node[red,below] at (c.south){símbolo terminal};%
+\end{tikzpicture}%
+\par $\text{FIRST}(\text{\textup{\textsf{V} } }) = \{\,\textbf{\texttt{x} } \,\} \cup \{\, \text{\textcolor {red}{\textbf{\texttt{*} } }} \,\}$%%
+
+
+                     \end{center} }
+                \only<16>{
+                     \begin{center}
+                         \begin{tikzpicture}%
+\node[rectangle,draw,fill=yellow!30](a){\textup{\textsf{S'} } };%
+\node[][right of=a](b){$\to$};%
+\node[rectangle,draw,fill=green!30][right of=b](c){\textup{\textsf{S} } } edge [->, bend right=45] node[auto,swap]{FIRST} (a);%
+\node[][right of=c](d){\textbf{\texttt{\$} } };%
+\node[red,below] at (c.south){símbolo não terminal};%
+\end{tikzpicture}%
+\par $\text{FIRST}(\text{\textup{\textsf{S'} } }) = \{\,\,\} \cup \{\, \text{\textcolor {red}{}} \,\}$%%
+
+
+                     \end{center} }
+                \only<17>{
+                     \begin{center}
+                         \begin{tikzpicture}%
+\node[rectangle,draw,fill=yellow!30](a){\textup{\textsf{S} } };%
+\node[][right of=a](b){$\to$};%
+\node[rectangle,draw,fill=green!30][right of=b](c){\textup{\textsf{V} } } edge [->, bend right=45] node[auto,swap]{FIRST} (a);%
+\node[][right of=c](d){\textbf{\texttt{=} } };%
+\node[][right of=d](e){\textup{\textsf{E} } };%
+\node[red,below] at (c.south){símbolo não terminal};%
+\end{tikzpicture}%
+\par $\text{FIRST}(\text{\textup{\textsf{S} } }) = \{\,\,\} \cup \{\, \text{\textcolor {red}{\textbf{\texttt{x} } ,\textbf{\texttt{*} } }} \,\}$%%
+
+
+                     \end{center} }
+                \only<18>{
+                     \begin{center}
+                         \begin{tikzpicture}%
+\node[rectangle,draw,fill=yellow!30](a){\textup{\textsf{S} } };%
+\node[][right of=a](b){$\to$};%
+\node[rectangle,draw,fill=green!30][right of=b](c){\textup{\textsf{E} } } edge [->, bend right=45] node[auto,swap]{FIRST} (a);%
+\node[red,below] at (c.south){símbolo não terminal};%
+\end{tikzpicture}%
+\par $\text{FIRST}(\text{\textup{\textsf{S} } }) = \{\,\textbf{\texttt{x} } ,\textbf{\texttt{*} } \,\} \cup \{\, \text{\textcolor {red}{}} \,\}$%%
+
+
+                     \end{center} }
+                \only<19>{
+                     \begin{center}
+                         \begin{tikzpicture}%
+\node[rectangle,draw,fill=yellow!30](a){\textup{\textsf{E} } };%
+\node[][right of=a](b){$\to$};%
+\node[rectangle,draw,fill=green!30][right of=b](c){\textup{\textsf{V} } } edge [->, bend right=45] node[auto,swap]{FIRST} (a);%
+\node[red,below] at (c.south){símbolo não terminal};%
+\end{tikzpicture}%
+\par $\text{FIRST}(\text{\textup{\textsf{E} } }) = \{\,\,\} \cup \{\, \text{\textcolor {red}{\textbf{\texttt{x} } ,\textbf{\texttt{*} } }} \,\}$%%
+
+
+                     \end{center} }
+                \only<20>{
+                     \begin{center}
+                         \begin{tikzpicture}%
+\node[rectangle,draw,fill=yellow!30](a){\textup{\textsf{S'} } };%
+\node[][right of=a](b){$\to$};%
+\node[rectangle,draw,fill=green!30][right of=b](c){\textup{\textsf{S} } } edge [->, bend right=45] node[auto,swap]{FIRST} (a);%
+\node[][right of=c](d){\textbf{\texttt{\$} } };%
+\node[red,below] at (c.south){símbolo não terminal};%
+\end{tikzpicture}%
+\par $\text{FIRST}(\text{\textup{\textsf{S'} } }) = \{\,\,\} \cup \{\, \text{\textcolor {red}{\textbf{\texttt{x} } ,\textbf{\texttt{*} } }} \,\}$%%
+
+
+                     \end{center} }
+                \only<21>{
+                     \begin{center}
+                         \begin{tikzpicture}%
+\node[rectangle,draw,fill=yellow!30](a){\textup{\textsf{S} } };%
+\node[][right of=a](b){$\to$};%
+\node[rectangle,draw,fill=green!30][right of=b](c){\textup{\textsf{V} } } edge [->, bend right=45] node[auto,swap]{FIRST} (a);%
+\node[][right of=c](d){\textbf{\texttt{=} } };%
+\node[][right of=d](e){\textup{\textsf{E} } };%
+\node[red,below] at (c.south){símbolo não terminal};%
+\end{tikzpicture}%
+\par $\text{FIRST}(\text{\textup{\textsf{S} } }) = \{\,\textbf{\texttt{x} } ,\textbf{\texttt{*} } \,\} \cup \{\, \text{\textcolor {red}{\textbf{\texttt{x} } ,\textbf{\texttt{*} } }} \,\}$%%
+
+
+                     \end{center} }
+                \only<22>{
+                     \begin{center}
+                         \begin{tikzpicture}%
+\node[rectangle,draw,fill=yellow!30](a){\textup{\textsf{S} } };%
+\node[][right of=a](b){$\to$};%
+\node[rectangle,draw,fill=green!30][right of=b](c){\textup{\textsf{E} } } edge [->, bend right=45] node[auto,swap]{FIRST} (a);%
+\node[red,below] at (c.south){símbolo não terminal};%
+\end{tikzpicture}%
+\par $\text{FIRST}(\text{\textup{\textsf{S} } }) = \{\,\textbf{\texttt{x} } ,\textbf{\texttt{*} } \,\} \cup \{\, \text{\textcolor {red}{\textbf{\texttt{x} } ,\textbf{\texttt{*} } }} \,\}$%%
+
+
+                     \end{center} }
+                \only<23>{
+                     \begin{center}
+                         \begin{tikzpicture}%
+\node[rectangle,draw,fill=yellow!30](a){\textup{\textsf{E} } };%
+\node[][right of=a](b){$\to$};%
+\node[rectangle,draw,fill=green!30][right of=b](c){\textup{\textsf{V} } } edge [->, bend right=45] node[auto,swap]{FIRST} (a);%
+\node[red,below] at (c.south){símbolo não terminal};%
+\end{tikzpicture}%
+\par $\text{FIRST}(\text{\textup{\textsf{E} } }) = \{\,\textbf{\texttt{x} } ,\textbf{\texttt{*} } \,\} \cup \{\, \text{\textcolor {red}{\textbf{\texttt{x} } ,\textbf{\texttt{*} } }} \,\}$%%
+
+
+                     \end{center} }
+                \only<24>{
+                     \begin{center}
+                         \begin{tikzpicture}%
+\node[rectangle,draw,fill=yellow!30](a){\textup{\textsf{S'} } };%
+\node[][right of=a](b){$\to$};%
+\node[rectangle,draw,fill=green!30][right of=b](c){\textup{\textsf{S} } } edge [->, bend right=45] node[auto,swap]{FIRST} (a);%
+\node[][right of=c](d){\textbf{\texttt{\$} } };%
+\node[red,below] at (c.south){símbolo não terminal};%
+\end{tikzpicture}%
+\par $\text{FIRST}(\text{\textup{\textsf{S'} } }) = \{\,\textbf{\texttt{x} } ,\textbf{\texttt{*} } \,\} \cup \{\, \text{\textcolor {red}{\textbf{\texttt{x} } ,\textbf{\texttt{*} } }} \,\}$%%
+
+
+                     \end{center} }
+                \only<25>{
+                     \begin{center}
+                         \begin{tikzpicture}%
+\node[rectangle,draw,fill=yellow!30](a){\textup{\textsf{S} } };%
+\node[][right of=a](b){$\to$};%
+\node[rectangle,draw,fill=green!30][right of=b](c){\textup{\textsf{V} } } edge [->, bend right=45] node[auto,swap]{FIRST} (a);%
+\node[][right of=c](d){\textbf{\texttt{=} } };%
+\node[][right of=d](e){\textup{\textsf{E} } };%
+\node[red,below] at (c.south){símbolo não terminal};%
+\end{tikzpicture}%
+\par $\text{FIRST}(\text{\textup{\textsf{S} } }) = \{\,\textbf{\texttt{x} } ,\textbf{\texttt{*} } \,\} \cup \{\, \text{\textcolor {red}{\textbf{\texttt{x} } ,\textbf{\texttt{*} } }} \,\}$%%
+
+
+                     \end{center} }
+                \only<26>{
+                     \begin{center}
+                         \begin{tikzpicture}%
+\node[rectangle,draw,fill=yellow!30](a){\textup{\textsf{S} } };%
+\node[][right of=a](b){$\to$};%
+\node[rectangle,draw,fill=green!30][right of=b](c){\textup{\textsf{E} } } edge [->, bend right=45] node[auto,swap]{FIRST} (a);%
+\node[red,below] at (c.south){símbolo não terminal};%
+\end{tikzpicture}%
+\par $\text{FIRST}(\text{\textup{\textsf{S} } }) = \{\,\textbf{\texttt{x} } ,\textbf{\texttt{*} } \,\} \cup \{\, \text{\textcolor {red}{\textbf{\texttt{x} } ,\textbf{\texttt{*} } }} \,\}$%%
+
+
+                     \end{center} }
+                \only<27>{
+                     \begin{center}
+                         \begin{tikzpicture}%
+\node[rectangle,draw,fill=yellow!30](a){\textup{\textsf{E} } };%
+\node[][right of=a](b){$\to$};%
+\node[rectangle,draw,fill=green!30][right of=b](c){\textup{\textsf{V} } } edge [->, bend right=45] node[auto,swap]{FIRST} (a);%
+\node[red,below] at (c.south){símbolo não terminal};%
+\end{tikzpicture}%
+\par $\text{FIRST}(\text{\textup{\textsf{E} } }) = \{\,\textbf{\texttt{x} } ,\textbf{\texttt{*} } \,\} \cup \{\, \text{\textcolor {red}{\textbf{\texttt{x} } ,\textbf{\texttt{*} } }} \,\}$%%
+
+
+                     \end{center} }
+                \only<30>{
+                     \begin{center}
+                         \begin{tikzpicture}%
+\node[](a){\textup{\textsf{S'} } };%
+\node[][right of=a](b){$\to$};%
+\node[rectangle,draw,fill=yellow!30][right of=b](c){\textup{\textsf{S} } };%
+\node[rectangle,draw,fill=green!30][right of=c](d){\textbf{\texttt{\$} } } edge [->, bend right=45] node[auto,swap]{FIRST}(c);%
+\end{tikzpicture}%
+\par $\text{FOLLOW}(\text{\textup{\textsf{S} } }) = \{\,\,\} \cup \{\, \text{\textcolor {red}{\textbf{\texttt{\$} } }} \,\}$%%
+%
+
+                     \end{center} }
+                \only<31>{
+                     \begin{center}
+                         \begin{tikzpicture}%
+\node[](a){\textup{\textsf{S} } };%
+\node[][right of=a](b){$\to$};%
+\node[rectangle,draw,fill=yellow!30][right of=b](c){\textup{\textsf{V} } };%
+\node[rectangle,draw,fill=green!30][right of=c](d){\textbf{\texttt{=} } } edge [->, bend right=45] node[auto,swap]{FIRST}(c);%
+\node[][right of=d](e){\textup{\textsf{E} } };%
+\end{tikzpicture}%
+\par $\text{FOLLOW}(\text{\textup{\textsf{V} } }) = \{\,\,\} \cup \{\, \text{\textcolor {red}{\textbf{\texttt{=} } }} \,\}$%%
+%
+
+                     \end{center} }
+                \only<32>{
+                     \begin{center}
+                         \begin{tikzpicture}%
+\node[](a){\textup{\textsf{S} } };%
+\node[][right of=a](b){$\to$};%
+\node[][right of=b](c){\textup{\textsf{V} } };%
+\node[][right of=c](d){\textbf{\texttt{=} } };%
+\node[rectangle,draw,fill=yellow!30][right of=d](e){\textup{\textsf{E} } };%
+\end{tikzpicture}%
+\par Náo há nenhum símbolo após o último não terminal%
+
+                     \end{center} }
+                \only<33>{
+                     \begin{center}
+                         \begin{tikzpicture}%
+\node[](a){\textup{\textsf{S} } };%
+\node[][right of=a](b){$\to$};%
+\node[rectangle,draw,fill=yellow!30][right of=b](c){\textup{\textsf{E} } };%
+\end{tikzpicture}%
+\par Náo há nenhum símbolo após o último não terminal%
+
+                     \end{center} }
+                \only<34>{
+                     \begin{center}
+                         \begin{tikzpicture}%
+\node[](a){\textup{\textsf{E} } };%
+\node[][right of=a](b){$\to$};%
+\node[rectangle,draw,fill=yellow!30][right of=b](c){\textup{\textsf{V} } };%
+\end{tikzpicture}%
+\par Náo há nenhum símbolo após o último não terminal%
+
+                     \end{center} }
+                \only<35>{
+                     \begin{center}
+                         \textup{\textsf{V} } $\to $\textbf{\texttt{x} } \par Nenhum símbolo não terminal no lado direito da regra \par Regra inútil
+                     \end{center} }
+                \only<36>{
+                     \begin{center}
+                         \begin{tikzpicture}%
+\node[](a){\textup{\textsf{V} } };%
+\node[][right of=a](b){$\to$};%
+\node[][right of=b](c){\textbf{\texttt{*} } };%
+\node[rectangle,draw,fill=yellow!30][right of=c](d){\textup{\textsf{E} } };%
+\end{tikzpicture}%
+\par Náo há nenhum símbolo após o último não terminal%
+
+                     \end{center} }
+                \only<37>{
+                     \begin{center}
+                         \begin{tikzpicture}%
+\node[](a){\textup{\textsf{S} } }edge [->, bend left=45] node[auto]{FOLLOW}(e);%
+;%
+\node[][right of=a](b){$\to$};%
+\node[][right of=b](c){\textup{\textsf{V} } };%
+\node[][right of=c](d){\textbf{\texttt{=} } };%
+\node[rectangle,draw,fill=yellow!30][right of=d](e){\textup{\textsf{E} } };%
+\end{tikzpicture}%
+\par $\text{FOLLOW}(\text{\textup{\textsf{E} } }) = \{\,\,\} \cup \{\, \text{\textcolor {red}{\textbf{\texttt{\$} } }} \,\}$%%
+%
+
+                     \end{center} }
+                \only<38>{
+                     \begin{center}
+                         \begin{tikzpicture}%
+\node[](a){\textup{\textsf{S} } }edge [->, bend left=45] node[auto]{FOLLOW}(c);%
+;%
+\node[][right of=a](b){$\to$};%
+\node[rectangle,draw,fill=yellow!30][right of=b](c){\textup{\textsf{E} } };%
+\end{tikzpicture}%
+\par $\text{FOLLOW}(\text{\textup{\textsf{E} } }) = \{\,\textbf{\texttt{\$} } \,\} \cup \{\, \text{\textcolor {red}{\textbf{\texttt{\$} } }} \,\}$%%
+%
+
+                     \end{center} }
+                \only<39>{
+                     \begin{center}
+                         \begin{tikzpicture}%
+\node[](a){\textup{\textsf{E} } }edge [->, bend left=45] node[auto]{FOLLOW}(c);%
+;%
+\node[][right of=a](b){$\to$};%
+\node[rectangle,draw,fill=yellow!30][right of=b](c){\textup{\textsf{V} } };%
+\end{tikzpicture}%
+\par $\text{FOLLOW}(\text{\textup{\textsf{V} } }) = \{\,\textbf{\texttt{=} } \,\} \cup \{\, \text{\textcolor {red}{\textbf{\texttt{\$} } }} \,\}$%%
+%
+
+                     \end{center} }
+                \only<40>{
+                     \begin{center}
+                         \begin{tikzpicture}%
+\node[](a){\textup{\textsf{V} } }edge [->, bend left=45] node[auto]{FOLLOW}(d);%
+;%
+\node[][right of=a](b){$\to$};%
+\node[][right of=b](c){\textbf{\texttt{*} } };%
+\node[rectangle,draw,fill=yellow!30][right of=c](d){\textup{\textsf{E} } };%
+\end{tikzpicture}%
+\par $\text{FOLLOW}(\text{\textup{\textsf{E} } }) = \{\,\textbf{\texttt{\$} } \,\} \cup \{\, \text{\textcolor {red}{\textbf{\texttt{=} } ,\textbf{\texttt{\$} } }} \,\}$%%
+%
+
+                     \end{center} }
+                \only<41>{
+                     \begin{center}
+                         \begin{tikzpicture}%
+\node[](a){\textup{\textsf{S} } }edge [->, bend left=45] node[auto]{FOLLOW}(e);%
+;%
+\node[][right of=a](b){$\to$};%
+\node[][right of=b](c){\textup{\textsf{V} } };%
+\node[][right of=c](d){\textbf{\texttt{=} } };%
+\node[rectangle,draw,fill=yellow!30][right of=d](e){\textup{\textsf{E} } };%
+\end{tikzpicture}%
+\par $\text{FOLLOW}(\text{\textup{\textsf{E} } }) = \{\,\textbf{\texttt{\$} } ,\textbf{\texttt{=} } \,\} \cup \{\, \text{\textcolor {red}{\textbf{\texttt{\$} } }} \,\}$%%
+%
+
+                     \end{center} }
+                \only<42>{
+                     \begin{center}
+                         \begin{tikzpicture}%
+\node[](a){\textup{\textsf{S} } }edge [->, bend left=45] node[auto]{FOLLOW}(c);%
+;%
+\node[][right of=a](b){$\to$};%
+\node[rectangle,draw,fill=yellow!30][right of=b](c){\textup{\textsf{E} } };%
+\end{tikzpicture}%
+\par $\text{FOLLOW}(\text{\textup{\textsf{E} } }) = \{\,\textbf{\texttt{\$} } ,\textbf{\texttt{=} } \,\} \cup \{\, \text{\textcolor {red}{\textbf{\texttt{\$} } }} \,\}$%%
+%
+
+                     \end{center} }
+                \only<43>{
+                     \begin{center}
+                         \begin{tikzpicture}%
+\node[](a){\textup{\textsf{E} } }edge [->, bend left=45] node[auto]{FOLLOW}(c);%
+;%
+\node[][right of=a](b){$\to$};%
+\node[rectangle,draw,fill=yellow!30][right of=b](c){\textup{\textsf{V} } };%
+\end{tikzpicture}%
+\par $\text{FOLLOW}(\text{\textup{\textsf{V} } }) = \{\,\textbf{\texttt{=} } ,\textbf{\texttt{\$} } \,\} \cup \{\, \text{\textcolor {red}{\textbf{\texttt{\$} } ,\textbf{\texttt{=} } }} \,\}$%%
+%
+
+                     \end{center} }
+                \only<44>{
+                     \begin{center}
+                         \begin{tikzpicture}%
+\node[](a){\textup{\textsf{V} } }edge [->, bend left=45] node[auto]{FOLLOW}(d);%
+;%
+\node[][right of=a](b){$\to$};%
+\node[][right of=b](c){\textbf{\texttt{*} } };%
+\node[rectangle,draw,fill=yellow!30][right of=c](d){\textup{\textsf{E} } };%
+\end{tikzpicture}%
+\par $\text{FOLLOW}(\text{\textup{\textsf{E} } }) = \{\,\textbf{\texttt{\$} } ,\textbf{\texttt{=} } \,\} \cup \{\, \text{\textcolor {red}{\textbf{\texttt{=} } ,\textbf{\texttt{\$} } }} \,\}$%%
+%
+
+                     \end{center} }
+                \only<45>{
+                     \begin{center}
+                         \textbf{Construção da tabela LL(1)}
+                         
+                     \end{center} }
+                \only<46>{
+                     \begin{center}
+                         $\text{FIRST} (\textcolor
+                         {red}{\textup{\textsf{S} } }\,
+                         \textbf{\texttt{\$} } ) = \{\, \,
+                         \}\cup \{\, \textcolor
+                         {red}{\textbf{\texttt{x} } }\,
+                         \textcolor
+                         {red}{\textbf{\texttt{*} } }\, \}$
+                     \end{center} }
+                \only<47>{
+                     \begin{center}
+                         
+                         \begin{tabular}{cccc}
+                             &&&\\\textup{\textsf{S'} }
+                             &$\to $&\textup{\textsf{S} }
+                             &\textbf{\texttt{\$} }
+                             \\&&\textbf{\texttt{x} } \,
+                             \textbf{\texttt{*} } &
+                         \end{tabular} 
+                     \end{center} }
+                \only<48>{
+                     \begin{center}
+                         $\text{FIRST} (\textcolor
+                         {red}{\textup{\textsf{V} } }\,
+                         \textbf{\texttt{=} } \,
+                         \textup{\textsf{E} } ) = \{\, \,
+                         \}\cup \{\, \textcolor
+                         {red}{\textbf{\texttt{x} } }\,
+                         \textcolor
+                         {red}{\textbf{\texttt{*} } }\, \}$
+                     \end{center} }
+                \only<49>{
+                     \begin{center}
+                         
+                         \begin{tabular}{ccccc}
+                             &&&&\\\textup{\textsf{S} }
+                             &$\to $&\textup{\textsf{V} }
+                             &\textbf{\texttt{=} }
+                             &\textup{\textsf{E} }
+                             \\&&\textbf{\texttt{x} } \,
+                             \textbf{\texttt{*} } &&
+                         \end{tabular} 
+                     \end{center} }
+                \only<50>{
+                     \begin{center}
+                         $\text{FIRST} (\textcolor
+                         {red}{\textup{\textsf{E} }
+                         }) = \{\, \, \}\cup \{\, \textcolor
+                         {red}{\textbf{\texttt{x} } }\,
+                         \textcolor
+                         {red}{\textbf{\texttt{*} } }\, \}$
+                     \end{center} }
+                \only<51>{
+                     \begin{center}
+                         
+                         \begin{tabular}{ccc}
+                             &&\\\textup{\textsf{S} } &$\to
+                             $&\textup{\textsf{E} }
+                             \\&&\textbf{\texttt{x} } \,
+                             \textbf{\texttt{*} } 
+                         \end{tabular} 
+                     \end{center} }
+                \only<52>{
+                     \begin{center}
+                         $\text{FIRST} (\textcolor
+                         {red}{\textup{\textsf{V} }
+                         }) = \{\, \, \}\cup \{\, \textcolor
+                         {red}{\textbf{\texttt{x} } }\,
+                         \textcolor
+                         {red}{\textbf{\texttt{*} } }\, \}$
+                     \end{center} }
+                \only<53>{
+                     \begin{center}
+                         
+                         \begin{tabular}{ccc}
+                             &&\\\textup{\textsf{E} } &$\to
+                             $&\textup{\textsf{V} }
+                             \\&&\textbf{\texttt{x} } \,
+                             \textbf{\texttt{*} } 
+                         \end{tabular} 
+                     \end{center} }
+                \only<54>{
+                     \begin{center}
+                         $\text{FIRST} (\textcolor
+                         {red}{\textbf{\texttt{x} }
+                         }) = \{\, \, \}\cup \{\, \textcolor
+                         {red}{\textbf{\texttt{x} } }\, \}$
+                     \end{center} }
+                \only<55>{
+                     \begin{center}
+                         
+                         \begin{tabular}{ccc}
+                             &&\\\textup{\textsf{V} } &$\to
+                             $&\textbf{\texttt{x} }
+                             \\&&\textbf{\texttt{x} } 
+                         \end{tabular} 
+                     \end{center} }
+                \only<56>{
+                     \begin{center}
+                         $\text{FIRST} (\textcolor
+                         {red}{\textbf{\texttt{*} } }\,
+                         \textup{\textsf{E} } ) = \{\, \,
+                         \}\cup \{\, \textcolor
+                         {red}{\textbf{\texttt{*} } }\, \}$
+                     \end{center} }
+                \only<57>{
+                     \begin{center}
+                         
+                         \begin{tabular}{cccc}
+                             &&&\\\textup{\textsf{V} } &$\to
+                             $&\textbf{\texttt{*} }
+                             &\textup{\textsf{E} }
+                             \\&&\textbf{\texttt{*} } &
+                         \end{tabular} 
+                     \end{center} } 
+            \end{flushleft} 
+        \end{overprint} }
+    \end{frame} 
+\end{document} 

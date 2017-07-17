@@ -1,0 +1,78 @@
+\documentclass[a4paper]{beamer}\usepackage{ifluatex}
+\ifluatex
+\usepackage{polyglossia}\setdefaultlanguage[]{brazil}
+\usepackage{lmodern}
+\else
+\usepackage[utf8]{inputenc}\usepackage[brazilian]{babel}
+\usepackage{newtxtext}
+\usepackage[varg]{newtxmath}
+\fi
+\usepackage{tikz}\usepackage{amssymb}\usepackage{relsize}\usepackage{etex}
+%\usepackage{shellesc}
+\usepackage{widest}
+\usepackage[tikz,debug]{dot2texi}
+\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{quotes,graphs}
+\ifluatex
+\usetikzlibrary{graphdrawing}
+\usegdlibrary{layered,force,circular}
+\else
+\fi
+%\reserveinserts{28}
+\newcommand<>{\bgyellow}[1]{{\fboxsep 0pt\only#2{\colorbox{yellow!30}}{#1}}}
+\usetheme{OuroPreto}
+\setbeamersize{text margin left=0.2em, text margin right=0.2em}
+\setbeamercovered{transparent}\author{José Romildo Malaquias}\title{Análise Sintática LR}\begin{document}\scriptsize
+\smaller[4]\newbox\a
+\newbox\b
+\newbox\c
+\newbox\d
+\newbox\e
+\newbox\f
+\newbox\g
+\newbox\h
+\newbox\i
+\begin{frame}\maketitle{}\end{frame}\begin{frame}[fragile,plain]
+\begin{tabular}[t]{@{}l@{}l@{}l@{}}\newdimen\largestnumber\widest(0,1,2,3,4)\largestnumber\newdimen\largestlhs\widest(S',S,S,L,L)\largestlhs\begin{tabular}[t]{l}\uncover<1->{\invisible<-2>{\bgyellow<3,5>{\makebox[\largestnumber][l]{\textsmaller[2]{\invisible<-3>{\alert<4>{0}}}}\hspace{2.00000pt}\makebox[\largestlhs][r]{\textup{\textsf{S'}}}$\to{}$\alert<3>{\textup{\textsf{S}}}\hspace{2.00000pt}\textbf{\texttt{\$}}}}}\\\uncover<1->{\bgyellow<2-3,6,12,26>{\makebox[\largestnumber][l]{\textsmaller[2]{\invisible<-3>{\alert<4>{1}}}}\hspace{2.00000pt}\makebox[\largestlhs][r]{\alert<2-3>{\textup{\textsf{S}}}}$\to{}$\textbf{\texttt{(}}\hspace{2.00000pt}\textup{\textsf{L}}\hspace{2.00000pt}\textbf{\texttt{)}}}}\\\uncover<1->{\bgyellow<6,12,26>{\makebox[\largestnumber][l]{\textsmaller[2]{\invisible<-3>{\alert<4>{2}}}}\hspace{2.00000pt}\makebox[\largestlhs][r]{\textup{\textsf{S}}}$\to{}$\textbf{\texttt{x}}}}\\\uncover<1->{\bgyellow<11,13>{\makebox[\largestnumber][l]{\textsmaller[2]{\invisible<-3>{\alert<4>{3}}}}\hspace{2.00000pt}\makebox[\largestlhs][r]{\textup{\textsf{L}}}$\to{}$\textup{\textsf{S}}}}\\\uncover<1->{\bgyellow<11,13>{\makebox[\largestnumber][l]{\textsmaller[2]{\invisible<-3>{\alert<4>{4}}}}\hspace{2.00000pt}\makebox[\largestlhs][r]{\textup{\textsf{L}}}$\to{}$\textup{\textsf{L}}\hspace{2.00000pt}\textbf{\texttt{,}}\hspace{2.00000pt}\textup{\textsf{S}}}}\end{tabular}&
+\setbox\a\hbox{%
+\visible<5->{\begin{tabular}[t]{|l|}\multicolumn{1}{l}{\visible<7->{\alert<7>{1}}}\\\hline \invisible<-4,-4>{\bgyellow<5,5>{\textup{\textsf{S'}}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\alert<6,8>{\textup{\textsf{S}}}~\textbf{\texttt{\$}}}}\\\hline \invisible<-5>{\bgyellow<6>{\textup{\textsf{S}}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\alert<10>{\textbf{\texttt{(}}}~\textup{\textsf{L}}~\textbf{\texttt{)}}}}\\\invisible<-5>{\bgyellow<6>{\textup{\textsf{S}}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\alert<15>{\textbf{\texttt{x}}}}}\\\hline \end{tabular}}}%
+\setbox\b\hbox{%
+\visible<8->{\begin{tabular}[t]{|l|}\multicolumn{1}{l}{\alert<9>{2}}\\\hline \visible<8->{\textup{\textsf{S'}}$\to{}$\alert<8>{\textup{\textsf{S}}}\textcolor{blue}{$\,\bullet{}\,$}\textbf{\texttt{\$}}}\\\hline \end{tabular}}}%
+\setbox\c\hbox{%
+\visible<10->{\begin{tabular}[t]{|l|}\multicolumn{1}{l}{\alert<14>{\bgyellow<21,30>{3}}}\\\hline \visible<30-,21-,10-,10->{\textup{\textsf{S}}$\to{}$\alert<30,21,10,10>{\textbf{\texttt{(}}}\textcolor{blue}{$\,\bullet{}\,$}\alert<11,17>{\textup{\textsf{L}}}~\textbf{\texttt{)}}}\\\hline \invisible<-12,-10,-10>{\bgyellow<13,11,11>{\textup{\textsf{L}}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\alert<12,19>{\textup{\textsf{S}}}}}\\\invisible<-12,-10,-10>{\bgyellow<13,11,11>{\textup{\textsf{L}}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\alert<13,17>{\textup{\textsf{L}}}~\textbf{\texttt{,}}~\textup{\textsf{S}}}}\\\hline \invisible<-11>{\bgyellow<12>{\textup{\textsf{S}}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\alert<21>{\textbf{\texttt{(}}}~\textup{\textsf{L}}~\textbf{\texttt{)}}}}\\\invisible<-11>{\bgyellow<12>{\textup{\textsf{S}}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\alert<22>{\textbf{\texttt{x}}}}}\\\hline \end{tabular}}}%
+\setbox\d\hbox{%
+\visible<15->{\begin{tabular}[t]{|l|}\multicolumn{1}{l}{\alert<16>{\bgyellow<22,31>{4}}}\\\hline \visible<31-,22-,15->{\textup{\textsf{S}}$\to{}$\alert<31,22,15>{\textbf{\texttt{x}}}\textcolor{blue}{$\,\bullet{}\,$}}\\\hline \end{tabular}}}%
+\setbox\e\hbox{%
+\visible<17->{\begin{tabular}[t]{|l|}\multicolumn{1}{l}{\alert<18>{5}}\\\hline \visible<17->{\textup{\textsf{S}}$\to{}$\textbf{\texttt{(}}~\alert<17>{\textup{\textsf{L}}}\textcolor{blue}{$\,\bullet{}\,$}\alert<23>{\textbf{\texttt{)}}}}\\\visible<17->{\textup{\textsf{L}}$\to{}$\alert<17>{\textup{\textsf{L}}}\textcolor{blue}{$\,\bullet{}\,$}\alert<25>{\textbf{\texttt{,}}}~\textup{\textsf{S}}}\\\hline \end{tabular}}}%
+\setbox\f\hbox{%
+\visible<19->{\begin{tabular}[t]{|l|}\multicolumn{1}{l}{\alert<20>{6}}\\\hline \visible<19->{\textup{\textsf{L}}$\to{}$\alert<19>{\textup{\textsf{S}}}\textcolor{blue}{$\,\bullet{}\,$}}\\\hline \end{tabular}}}%
+\setbox\g\hbox{%
+\visible<23->{\begin{tabular}[t]{|l|}\multicolumn{1}{l}{\alert<24>{7}}\\\hline \visible<23->{\textup{\textsf{S}}$\to{}$\textbf{\texttt{(}}~\textup{\textsf{L}}~\alert<23>{\textbf{\texttt{)}}}\textcolor{blue}{$\,\bullet{}\,$}}\\\hline \end{tabular}}}%
+\setbox\h\hbox{%
+\visible<25->{\begin{tabular}[t]{|l|}\multicolumn{1}{l}{\alert<27>{8}}\\\hline \visible<25-,25->{\textup{\textsf{L}}$\to{}$\textup{\textsf{L}}~\alert<25,25>{\textbf{\texttt{,}}}\textcolor{blue}{$\,\bullet{}\,$}\alert<26,28>{\textup{\textsf{S}}}}\\\hline \invisible<-25>{\bgyellow<26>{\textup{\textsf{S}}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\alert<30>{\textbf{\texttt{(}}}~\textup{\textsf{L}}~\textbf{\texttt{)}}}}\\\invisible<-25>{\bgyellow<26>{\textup{\textsf{S}}$\to{}$\textcolor{blue}{$\,\bullet{}\,$}\alert<31>{\textbf{\texttt{x}}}}}\\\hline \end{tabular}}}%
+\setbox\i\hbox{%
+\visible<28->{\begin{tabular}[t]{|l|}\multicolumn{1}{l}{\alert<29>{9}}\\\hline \visible<28->{\textup{\textsf{L}}$\to{}$\textup{\textsf{L}}~\textbf{\texttt{,}}~\alert<28>{\textup{\textsf{S}}}\textcolor{blue}{$\,\bullet{}\,$}}\\\hline \end{tabular}}}%
+\begin{tikzpicture}[baseline=(current bounding box.north),rounded corners]
+%\graph [spring electrical Walshaw 2000 layout, node distance=2cm] {
+%\graph [simple necklace layout] {
+\graph [layered layout,
+         grow'=right,
+         grow down sep=2em,
+        ]{
+a/[as=\copy\a] -> ["{\textup{\textsf{S}}}"] b/[as=\copy\b];
+a -> ["{\textbf{\texttt{(}}}"] c/[as=\copy\c];
+a -> ["{\textbf{\texttt{x}}}"] d/[as=\copy\d];
+c -> ["{\textup{\textsf{L}}}"] e/[as=\copy\e];
+c -> ["{\textup{\textsf{S}}}"] f/[as=\copy\f];
+c -> ["{\textbf{\texttt{(}}}",loop left,distance=2mm] c;
+c -> ["{\textbf{\texttt{x}}}"] d;
+e -> ["{\textbf{\texttt{)}}}"] g/[as=\copy\g];
+e -> ["{\textbf{\texttt{,}}}"] h/[as=\copy\h];
+h -> ["{\textup{\textsf{S}}}"] i/[as=\copy\i];
+h -> ["{\textbf{\texttt{(}}}"] c;
+h -> ["{\textbf{\texttt{x}}}"] d;
+};
+\end{tikzpicture}
+&LR(0) Table\end{tabular}
+\end{frame}
+\end{document}

@@ -1,0 +1,29 @@
+S' -> S "$"
+
+S -> "id" ":=" E
+S -> "print" E
+S -> "while" E "do" S
+
+S -> "if" E "then" S X
+X -> "else" S
+X ->                                                       
+
+S -> "begin" L "end"
+
+L -> S ";" L
+L ->
+
+E  -> T E'
+E' -> "+" T E'
+E' -> "-" T E'
+E' ->                                           
+                                                
+T  -> F T'
+T' -> "*" F T'
+T' -> "/"  F T'
+T' ->
+
+F -> "num"
+F -> "id"
+F -> "read"
+F -> "(" E ")"

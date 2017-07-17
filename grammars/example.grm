@@ -1,0 +1,22 @@
+S  -> E ";"
+S  -> "id" ":=" E ";"
+S  -> "if" E "then" S "else" S
+S  -> "while" E "do" S
+S  -> "{" L "}"
+
+L  -> S L
+L  ->
+
+E  -> A "=" A
+E  -> A
+
+A  -> T A'
+A' -> "+" T A'
+A' ->
+
+T  -> F T'
+T' -> "*" F T'
+T' ->
+
+F  -> "id"
+F  -> "(" E ")"
