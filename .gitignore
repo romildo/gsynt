@@ -21,3 +21,6 @@ cabal.project.local
 
 *~
 _build/
+gsynt-?.?.?.?.zip
+gsynt-?.?.?.?
+#*.grm.nufifo.tex
