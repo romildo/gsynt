@@ -13,7 +13,7 @@ import           Text.LaTeX
 -- import           Text.LaTeX.Base.Class (LaTeXC, fromLaTeX, liftL, fromLaTeX)
 import           Text.LaTeX.Packages.Beamer
 import           Text.LaTeX.Packages.AMSMath (align_)
-import           Text.LaTeX.Packages.Trees.Forest
+import           Text.LaTeX.Packages.Trees.Forest (pforest)
 -- import Text.LaTeX.Packages.Trees.Qtree
 -- import Text.LaTeX.Packages.TikZ (tikz)
 import           Text.LaTeX.Packages.Inputenc
@@ -119,7 +119,7 @@ docLRLatex x =
      -- raw "\\usepackage[lmargin=1cm]{geometry}"
      -- raw "\\usepackage[]{longtable}"
      usepackage [utf8] inputenc
-     usepackage [] forest
+     usepackage [] pforest
      -- usepackage [] qtree
      -- usepackage [] "tikz-qtree"
      -- usepackage [] tikz

@@ -1,4 +1,3 @@
-
 {-# LANGUAGE OverloadedStrings #-}
 
 -- | Tree interface using the @forest@ package.
@@ -8,7 +7,7 @@ module Text.LaTeX.Packages.Trees.Forest (
   -- * Tree re-export
   module Text.LaTeX.Packages.Trees
   -- * Forest package
-  , forest
+  , pforest
   -- * Tree to LaTeX rendering
   , tree
   , rendertree
@@ -22,11 +21,11 @@ import Text.LaTeX.Packages.Trees (Tree(Leaf, Node))
 import Data.List (intersperse)
 
 -- | The 'forest' package.
-forest :: PackageName
-forest = "forest"
+pforest :: PackageName
+pforest = "forest"
 
-foreste :: LaTeXC l => l -> l
-foreste = liftL $ TeXEnv "forest" []
+forest :: LaTeXC l => l -> l
+forest = liftL $ TeXEnv "forest" []
 
 tree_ :: LaTeXC l => (a -> l) -> Tree a -> l
 tree_ f (Leaf x) = mconcat [ "[", braces $ f x, "]" ]
@@ -41,7 +40,7 @@ tree_ f (Node mx ts) =
 -- | Given a function to @LaTeX@ values, you can create a @LaTeX@ tree from a
 --   Haskell tree. The function specifies how to render the node values.
 tree :: LaTeXC l => (a -> l) -> Tree a -> l
-tree f t = foreste $
+tree f t = forest $
               raw "where n children=0{tier=word}{},"
            <> raw "baseline=(current bounding box.north),"
            <> raw "nt/.style={draw={red,thick}},"
