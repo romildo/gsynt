@@ -10,7 +10,8 @@ import Data.List (intersperse, intercalate, sort, inits, tails, union)
 import Data.Maybe (fromJust, fromMaybe)
 import Text.Printf (printf)
 import Control.Monad (forM_)
--- import IPPrint (pshowWidth)
+import Debug.Trace (trace, traceShowId)
+import IPPrint (pshow, pprint)
 
 import Text.LaTeX
 import Text.LaTeX.Base.Class (LaTeXC, comm0, fromLaTeX)
@@ -45,6 +46,10 @@ data View =
   , nonts       :: [ Symbol ]
   }
 --  deriving (Show)
+
+
+tracePshowId x = trace (pshow x) x
+
 
 foldrFlipped :: [a] -> b -> (a -> b -> b) -> b
 foldrFlipped xs z f = foldr f z xs
@@ -734,10 +739,10 @@ texyView v = do
 
 texyViewGrammar :: (Monad m) => View -> LaTeXT_ m
 texyViewGrammar v@View{grammar} = do
-  let names = intercalate "," (map (\(Doc _ (Doc _ lhs : _)) -> case lhs of N x -> x; T x -> x) grammar)
+  let names = map (\(Doc _ (Doc _ lhs : _)) -> case lhs of N x -> x; T x -> x) grammar
   raw "\\newdimen\\largest"
   raw "\\widest("
-  raw (fromString names)
+  sequence_ (intersperse "," (map fromString names))
   raw ")\\largest%\n"
   tabular (Just Top) [Separator (raw ""), LeftColumn, Separator (raw "")] $ do
     sequence_ $ intersperse lnbk $ flip map grammar $ \(Doc a (lhs : rhs)) ->

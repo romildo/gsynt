@@ -4,7 +4,7 @@
 
 module Grammar where
 
-import Data.List (union, groupBy, sort, mapAccumL, intersperse)
+import Data.List (union, groupBy, sort, mapAccumL, intersperse, find)
 import Data.Maybe (fromMaybe)
 
 import Text.LaTeX
@@ -136,10 +136,10 @@ addEOFToGrammar :: Grammar -> Grammar
 addEOFToGrammar grm@(Grammar rules) =
   case rules of
     (_ ::= [_, T "$"]) : _ -> grm
-    (N s ::= _) : _ -> Grammar ((N s' ::= [N s, T "$"]) : rules)
+    (N s ::= _) : _ -> Grammar ((N newStart ::= [N s, T "$"]) : rules)
       where
-        s' | elem (N "S") (nonterminals grm) = s ++ "'"
-           | otherwise = "S"
+        options = ["S", s ++ "'", "_" ++ s]
+        newStart = fromMaybe "START" (find (flip (notElem . N) (nonterminals grm)) options)
     _ -> grm
 
 startSymbol :: Grammar -> Maybe Symbol
