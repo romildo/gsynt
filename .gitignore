@@ -20,7 +20,7 @@ cabal.project.local
 .HTF/
 
 *~
-_build/
+**/_build/
+**/build/
 gsynt-?.?.?.?.zip
 gsynt-?.?.?.?
-#*.grm.nufifo.tex
