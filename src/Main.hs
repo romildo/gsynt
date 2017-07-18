@@ -1,7 +1,10 @@
+{-# LANGUAGE LambdaCase #-}
+
 module Main where
 
 import Control.Monad (when, (>=>))
-import System.Console.GetOpt (OptDescr(Option), ArgDescr(NoArg), ArgOrder(Permute), usageInfo, getOpt)
+import Data.List (find)
+import System.Console.GetOpt (OptDescr(Option), ArgDescr(NoArg, ReqArg), ArgOrder(Permute), usageInfo, getOpt)
 import System.Environment (getProgName, getArgs)
 import System.IO (IOMode(..), withFile, hGetContents)
 import Text.LaTeX (execLaTeXT, renderFile)
@@ -16,19 +19,29 @@ import SlidesNuFiFo (latexNuFiFo)
 
 
 
-data Flag = Nullable | FIRST | FOLLOW | LL1 | LR0 | LR1 | SLIDESNFF | LATEX
-            deriving (Eq,Show)
+data Flag
+  = Nullable
+  | FIRST
+  | FOLLOW
+  | LL1
+  | LR0
+  | LR1
+  | SLIDESNFF
+  | LATEX
+  | FontScale { fontScale :: String }
+  deriving (Eq,Show)
 
 options :: [OptDescr Flag]
 options =
-  [ Option ['n'] ["nullables"] (NoArg Nullable)  "print the nullables table"
-  , Option ['f'] ["first"    ] (NoArg FIRST)     "print the first table"
-  , Option ['w'] ["follow"   ] (NoArg FOLLOW)    "print the follow table"
-  , Option ['l'] ["ll1"      ] (NoArg LL1)       "print the LL(1) parse table"
-  , Option ['0'] ["lr0"      ] (NoArg LR0)       "print the LR(0) parse table"
-  , Option ['1'] ["lr1"      ] (NoArg LR1)       "print the LR(1) parse table"
-  , Option ['s'] ["slidesnff"] (NoArg SLIDESNFF) "slides for nullable, first and follow"
-  , Option ['x'] ["latex"    ] (NoArg LATEX)     "print the latex document"
+  [ Option ['n'] ["nullables"] (NoArg Nullable)        "print the nullables table"
+  , Option ['f'] ["first"    ] (NoArg FIRST)           "print the first table"
+  , Option ['w'] ["follow"   ] (NoArg FOLLOW)          "print the follow table"
+  , Option ['l'] ["ll1"      ] (NoArg LL1)             "print the LL(1) parse table"
+  , Option ['0'] ["lr0"      ] (NoArg LR0)             "print the LR(0) parse table"
+  , Option ['1'] ["lr1"      ] (NoArg LR1)             "print the LR(1) parse table"
+  , Option ['s'] ["slidesnff"] (NoArg SLIDESNFF)       "slides for nullable, first and follow"
+  , Option ['x'] ["latex"    ] (NoArg LATEX)           "print the latex document"
+  , Option ['z'] ["fontscale" ] (ReqArg FontScale "NUMBER") "main latex document font scale"
   ]
 
 usedOpts :: String -> [String] -> IO ([Flag], Maybe String)
@@ -72,7 +85,8 @@ process o f input =
                         putStrLn ""
                    when (elem SLIDESNFF o) $
                      do putStrLn ">>>>>>>>>> Nullable, first and follow Latex document: "
-                        ltx <- execLaTeXT (latexNuFiFo g)
+                        let scale = fmap fontScale (find (\case {FontScale _ -> True; _ -> False}) o)
+                        ltx <- execLaTeXT (latexNuFiFo scale g)
                         --renderFile (f ++ ".nufifo.tex") ltx
                         writeFile (f ++ ".nufifo.tex") (prettyLaTeX ltx)
                         putStrLn (f ++ ".nufifo.tex")

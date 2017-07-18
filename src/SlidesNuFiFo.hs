@@ -8,6 +8,7 @@ module SlidesNuFiFo where
 
 import Data.List (intersperse, intercalate, sort, inits, tails, union)
 import Data.Maybe (fromJust, fromMaybe)
+import qualified Data.Text as T
 import Text.Printf (printf)
 import Control.Monad (forM_)
 import Debug.Trace (trace, traceShowId)
@@ -833,8 +834,8 @@ breakAll test list = breakAllLoop [] list
       | otherwise = breakAllLoop (x:prefix) xs
 
 
-latexNuFiFo :: Monad m => Grammar -> LaTeXT_ m
-latexNuFiFo grammar = do
+latexNuFiFo :: Monad m => Maybe String -> Grammar -> LaTeXT_ m
+latexNuFiFo fontScale grammar = do
   -- the document preamble
   documentclass [] beamer
   usepackage [utf8] inputenc
@@ -869,11 +870,12 @@ latexNuFiFo grammar = do
     --     \\\makeatother%\n"
     frame $ do
       frametitle "Exemplo"
-      -- normalsize
+      normalsize
       -- small
       -- footnotesize
-      scriptsize
+      -- scriptsize
       -- tiny
         $ do
         -- raw "\\smaller"
+        maybe mempty (raw . T.pack . printf "\\relscale{%s}") fontScale
         texyView (build grammar)
