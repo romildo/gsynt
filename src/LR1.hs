@@ -14,7 +14,11 @@ import Grammar
 -- LR(1) table
 ---------------------------------------------------------------------
 
-type LR1Item = (Symbol,[Symbol],[Symbol],[String])
+type LR1Item = ( Symbol   -- left side of production rule
+               , [Symbol] -- prefix of right side on stack
+               , [Symbol] -- sufix of right side
+               , [String] -- lookahead symbols
+               )
 
 type LR1State = [LR1Item]
 
