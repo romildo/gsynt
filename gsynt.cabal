@@ -21,7 +21,7 @@ executable gsynt
   hs-source-dirs:      src
   -- other-modules:       
   -- other-extensions:    
-  build-depends:       base >=4.8 && <4.10
+  build-depends:       base >=4.8 && <4.11
                      , HaTeX >= 3.14.0.0
                      , mtl >= 2.2.1
                      , parsec >= 3.1.7
