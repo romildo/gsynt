@@ -1,5 +1,5 @@
 S -> "u" B D "z"
-B -> B "u"
+B -> B "v"
 B -> "w"
 D -> E F
 E -> "y"

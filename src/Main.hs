@@ -14,18 +14,20 @@ import Text.Parsec (parse, SourceName)
 import Grammar
 import GrammarParser
 import LR0 (latexLR0)
-import LR1 (lr1, ppLR1Table)
+import LR1 (lr1, ppLR1Table, latexLR1Table)
 import SlidesNuFiFo (latexNuFiFo)
-
+import Factorization (factorize)
 
 
 data Flag
   = Nullable
   | FIRST
   | FOLLOW
+  | Factor
   | LL1
   | LR0
   | LR1
+  | LR1Latex
   | SLIDESNFF
   | LATEX
   | FontScale { fontScale :: String }
@@ -36,9 +38,11 @@ options =
   [ Option ['n'] ["nullables"] (NoArg Nullable)        "print the nullables table"
   , Option ['f'] ["first"    ] (NoArg FIRST)           "print the first table"
   , Option ['w'] ["follow"   ] (NoArg FOLLOW)          "print the follow table"
+  , Option ['a'] ["factor"   ] (NoArg Factor)          "left factorize"
   , Option ['l'] ["ll1"      ] (NoArg LL1)             "print the LL(1) parse table"
   , Option ['0'] ["lr0"      ] (NoArg LR0)             "print the LR(0) parse table"
   , Option ['1'] ["lr1"      ] (NoArg LR1)             "print the LR(1) parse table"
+  , Option ['2'] ["lr1latex" ] (NoArg LR1Latex)        "print the LR(1) parse table as a LaTeX snippet"
   , Option ['s'] ["slidesnff"] (NoArg SLIDESNFF)       "slides for nullable, first and follow"
   , Option ['x'] ["latex"    ] (NoArg LATEX)           "print the latex document"
   , Option ['z'] ["fontscale" ] (ReqArg FontScale "NUMBER") "main latex document font scale"
@@ -75,6 +79,10 @@ process o f input =
                      do putStrLn ">>>>>>>>>> Follow sets: "
                         putStrLn (showAssocList follows)
                         putStrLn ""
+                   when (elem Factor o) $
+                     do putStrLn ">>>>>>>>>> Left factored grammar: "
+                        putStrLn (show (factorize g))
+                        putStrLn ""
                    when (elem LL1 o) $
                      do putStrLn ">>>>>>>>>> LL(1) table: "
                         putStrLn (showTable (ll1Table g))
@@ -82,6 +90,13 @@ process o f input =
                    when (elem LR1 o) $
                      do putStrLn ">>>>>>>>>> LR(1) table: "
                         putStrLn (ppLR1Table (lr1 g))
+                        putStrLn ""
+                   when (elem LR1Latex o) $
+                     do putStrLn ">>>>>>>>>> LR(1) table: "
+                        ltx <- execLaTeXT (latexLR1Table g)
+                        --renderFile (f ++ ".lr1table.tex") ltx
+                        writeFile (f ++ ".lr1table.tex") (prettyLaTeX ltx)
+                        putStrLn (f ++ ".lr1table.tex")
                         putStrLn ""
                    when (elem SLIDESNFF o) $
                      do putStrLn ">>>>>>>>>> Nullable, first and follow Latex document: "

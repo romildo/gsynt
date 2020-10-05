@@ -8,7 +8,6 @@ import           Control.Monad.State (get, put, execState)
 import qualified Control.Monad.State as S (State)
 import           Data.List (intercalate, intersperse, partition, find, findIndex, nub, sort, (\\), groupBy)
 import           Debug.Trace (trace)
-import           IPPrint (pshow)
 
 import           Text.LaTeX
 -- import           Text.LaTeX.Base.Syntax (LaTeX(TeXRaw,TeXEnv), TeXArg(FixArg,OptArg))
@@ -213,7 +212,7 @@ transitions
   -> State
   -> (Slide, State, DocGrammar, [DocState], [DocTrans])
 transitions (i, ns, grammar, sts, ts) stnumber =
-  foldl mkTrans (i, ns, grammar, sts, ts) (tracepshow syms)
+  foldl mkTrans (i, ns, grammar, sts, ts) syms
   where
     Just ind = findIndex (\(Doc _ (Doc _ n, _)) -> n == stnumber) sts
     Doc a (pn, itemsLst) = sts !! ind
@@ -359,7 +358,7 @@ groupTransitions_ names_states transitions0 = do
   go 1 Nothing []
   return ()
   where
-    transitions = tracepshow transitions0
+    transitions = transitions0
     go :: Monad m => State -> Maybe Symbol -> [State] -> LaTeXT m [State]
     go src mSym done
       | elem src done =
@@ -384,7 +383,7 @@ groupTransitions_ names_states transitions0 = do
                      raw "};\n"
                      return done'
       where
-        Just (name, _) = find (\(_, Doc _ (Doc _ n, _)) -> n == src) (tracepshow names_states)
+        Just (name, _) = find (\(_, Doc _ (Doc _ n, _)) -> n == src) names_states
                      
 
 texyDocAutomataGraphvix :: Monad m => [DocState] -> [DocTrans] -> LaTeXT_ m

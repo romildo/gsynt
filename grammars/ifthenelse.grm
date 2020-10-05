@@ -1,4 +1,4 @@
-S' -> S "$"
+P -> S "$"
 
 S  -> "if" E "then" S "else" S
 S  -> "if" E "then" S
