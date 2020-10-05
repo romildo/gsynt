@@ -1,0 +1,36 @@
+S -> Program "$"
+
+Program -> Funs
+
+Funs -> Fun Funs'
+
+Funs' ->
+Funs' -> Funs
+
+Fun -> TypeId "(" TypeIds ")" "=" Exp
+
+TypeId -> "int" "id"
+TypeId -> "bool" "id"
+
+TypeIds -> TypeId TypeIds'
+TypeIds' ->
+TypeIds' -> "," TypeIds
+
+Exp -> "let" "id" "=" Exp "in" Exp
+Exp -> "if" Exp "then" Exp "else" Exp
+
+Exp -> A Exp'
+Exp' -> "<" A
+Exp' ->
+
+A -> T A'
+A' -> "+" T A'
+A' ->
+T -> "id" T'
+T' -> "(" Exps ")"
+T' ->
+T -> "num"
+
+Exps -> Exp Exps'
+Exps' ->
+Exps' -> "," Exps

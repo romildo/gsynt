@@ -4,7 +4,7 @@ module LR where
 
 import Control.Monad.Identity
 import Control.Monad.Writer
--- import Data.Tree
+import Data.Tree
 import Data.List (intersperse)
 import Text.LaTeX
 import Text.LaTeX.Base.Syntax (LaTeX(TeXRaw,TeXEnv), TeXArg(FixArg,OptArg))

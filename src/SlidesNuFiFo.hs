@@ -12,7 +12,7 @@ import qualified Data.Text as T
 import Text.Printf (printf)
 import Control.Monad (forM_)
 import Debug.Trace (trace, traceShowId)
-import IPPrint (pshow, pprint)
+-- import IPPrint (pshow, pprint)
 
 import Text.LaTeX
 import Text.LaTeX.Base.Class (LaTeXC, comm0, fromLaTeX)
@@ -49,7 +49,7 @@ data View =
 --  deriving (Show)
 
 
-tracePshowId x = trace (pshow x) x
+-- tracePshowId x = trace (pshow x) x
 
 
 foldrFlipped :: [a] -> b -> (a -> b -> b) -> b
@@ -848,7 +848,7 @@ latexNuFiFo fontScale grammar = do
   raw "\\usepackage{array}%\n"
   raw "\\usepackage{widest}%\n"
   raw "\\usepackage{relsize}%\n"
-  raw "\\reserveinserts{28}%\n"
+  raw "%\\reserveinserts{28}%\n"
   raw "\\setlength{\\tabcolsep}{3pt}%\n"
   raw "\\renewcommand{\\familydefault}{\\sfdefault}%\n"
   raw "\\newcommand<>{\\bgyellow}[1]{{\\fboxsep 0pt\\only#2{\\colorbox{yellow!30}}{#1}}}%\n"

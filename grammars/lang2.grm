@@ -1,0 +1,28 @@
+S -> D "$"
+
+D -> F D'
+
+D' ->
+D' -> F D'
+
+F -> "id" "(" P ")" "=" E
+
+P ->
+P -> "id" P'
+
+P' ->
+P' -> "," "id" P'
+
+E -> "num"
+E -> "id"
+E -> "+" E E
+E -> "*" E E
+E -> "=" E E
+E -> "if" E "then" E "else" E
+E -> "id" "(" A ")"
+E -> "let" "id" "=" E "in" E
+
+A ->
+A -> E A'
+A' ->
+A' -> "," E A

@@ -110,14 +110,14 @@ instance Show Grammar where
   show (Grammar g) = showG g
     where
     showG [] = ""
-    showG ((nt::=rhs):rs) = width (show nt) len ++ "->" ++
+    showG ((nt::=rhs):rs) = widen (show nt) len ++ " ->" ++
                             foldr (\x s -> " " ++ show x ++ s) "" rhs ++
                             "\n" ++
                             showG rs
 
     len = maximum (map (length . show . lhs) g)
 
-    width str n = str ++ " " ++ replicate (n - length str) '-'
+widen str n = str ++ replicate (n - length str) ' '
 
 
 -- instance Texy Grammar where
@@ -268,11 +268,17 @@ look :: Eq a => a -> [(a, [b])] -> [b]
 look key assoc = fromMaybe [] (lookup key assoc)
 
 
-showAssocList :: (Show a, Show b) => [(a, [b])] -> String
-showAssocList [] = ""
-showAssocList ((x,ys):rest) = "\n" ++ show x ++ "\t:\t" ++
-                              foldr (\t s -> show t ++ " " ++ s) "" ys ++
-                              showAssocList rest
+showAssocList :: [(String, [String])] -> String
+showAssocList alist = showAssocList' alist'
+  where
+    len = maximum (map (length . fst) alist)
+    alist' = map (\(k, v) -> (widen k len, v)) alist
+
+showAssocList' :: [(String, [String])] -> String
+showAssocList' [] = ""
+showAssocList' ((x,ys):rest) = "\n" ++ x ++ " : " ++
+                               foldr (\t s -> t ++ " " ++ s) "" ys ++
+                               showAssocList' rest
 
 
 testGrammar :: Grammar -> IO ()

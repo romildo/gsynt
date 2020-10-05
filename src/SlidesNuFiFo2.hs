@@ -11,7 +11,7 @@ import Data.Maybe (fromMaybe)
 import Text.Printf (printf)
 import Control.Monad (forM_)
 import Control.Monad.Trans.State (State, execState, modify, get, put)
-import IPPrint (pshowWidth)
+-- import IPPrint (pshowWidth)
 
 import Text.LaTeX
 import Text.LaTeX.Base.Class (LaTeXC, comm0, fromLaTeX)
@@ -640,7 +640,7 @@ latexNuFiFo grammar = do
   raw "\\usepackage[varg]{newtxmath}%\n"
   raw "\\usepackage{array}%\n"
   raw "\\usepackage{widest}%\n"
-  raw "\\reserveinserts{28}%\n"
+  raw "%\\reserveinserts{28}%\n"
   raw "\\setlength{\\tabcolsep}{3pt}%\n"
   raw "\\renewcommand{\\familydefault}{\\sfdefault}%\n"
   raw "\\newcommand<>{\\bgyellow}[1]{{\\fboxsep 0pt\\only#2{\\colorbox{yellow!30}}{#1}}}%\n"
